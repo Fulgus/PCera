@@ -21,15 +21,52 @@ public class Cuota implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Cuota Id_Cuota;
+    private Usuario Id_Usuario;
+    private Date fecha;
+    private Double Importe;
+    private Integer Estado;
 
-    public Long getId() {
-        return id;
+    public Cuota getId_Cuota() {
+        return Id_Cuota;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_Cuota(Cuota Id_Cuota) {
+        this.Id_Cuota = Id_Cuota;
     }
+
+    public Usuario getId_Usuario() {
+        return Id_Usuario;
+    }
+
+    public void setId_Usuario(Usuario Id_Usuario) {
+        this.Id_Usuario = Id_Usuario;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Double getImporte() {
+        return Importe;
+    }
+
+    public void setImporte(Double Importe) {
+        this.Importe = Importe;
+    }
+
+    public Integer getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(Integer Estado) {
+        this.Estado = Estado;
+    }
+
 
     @Override
     public int hashCode() {
