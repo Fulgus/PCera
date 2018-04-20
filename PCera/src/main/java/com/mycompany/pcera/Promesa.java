@@ -1,7 +1,8 @@
 package com.mycompany.pcera;
 
+import javax.persistence.*;
 import java.util.Date;
-
+import java.util.Objects;
 @Entity
 
 public class Promesa extends Usuario {
@@ -79,5 +80,22 @@ id del usuario.
                 ", seccionid=" + seccionid +
                 ", fecha=" + fecha +
                 '}';
+    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Promesa promesa = (Promesa) o;
+        return Objects.equals(user_id, promesa.user_id) &&
+                Objects.equals(seccion_id, promesa.seccion_id) &&
+                Objects.equals(usuario, promesa.usuario) &&
+                Objects.equals(seccionid, promesa.seccionid) &&
+                Objects.equals(fecha, promesa.fecha);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), user_id, seccion_id, usuario, seccionid, fecha);
     }
 }
