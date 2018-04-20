@@ -6,10 +6,13 @@
 package com.mycompany.pcera;
 
 import java.io.Serializable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,10 +22,15 @@ import javax.persistence.Id;
 public class Inscripcion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_inscripcion;
+    @EmbeddedId
+    private InscripcionId id_inscripcion;
+    
+    @ManyToOne
+    @JoinColumn (name = "Inscripcion_Usuario_FK")
     private Usuario id_Usuario;
+    
+    @ManyToOne
+    @JoinColumn (name = "Inscripcion_Evento_FK")
     private Evento id_Evento;
 
     public Usuario getId_Usuario() {
@@ -41,11 +49,11 @@ public class Inscripcion implements Serializable {
         this.id_Evento = id_Evento;
     }
 
-    public Long getId() {
+    public InscripcionId getId() {
         return id_inscripcion;
     }
 
-    public void setId(Long id) {
+    public void setId(InscripcionId id) {
         this.id_inscripcion = id;
     }
 
