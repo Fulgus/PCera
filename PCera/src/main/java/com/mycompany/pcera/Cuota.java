@@ -6,6 +6,7 @@
 package com.mycompany.pcera;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,28 +20,29 @@ import javax.persistence.Id;
 public class Cuota implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    //TODO: implementar la clase CuotaId para añadir el id de dos atributos.
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Cuota Id_Cuota;
-    private Usuario Id_Usuario;
+    private Cuota id_Cuota;
+    private Usuario id_Usuario;
     private Date fecha;
     private Double Importe;
     private Integer Estado;
 
     public Cuota getId_Cuota() {
-        return Id_Cuota;
+        return id_Cuota;
     }
 
-    public void setId_Cuota(Cuota Id_Cuota) {
-        this.Id_Cuota = Id_Cuota;
+    public void setId_Cuota(Cuota id_Cuota) {
+        this.id_Cuota = id_Cuota;
     }
 
     public Usuario getId_Usuario() {
-        return Id_Usuario;
+        return id_Usuario;
     }
 
-    public void setId_Usuario(Usuario Id_Usuario) {
-        this.Id_Usuario = Id_Usuario;
+    public void setId_Usuario(Usuario id_Usuario) {
+        this.id_Usuario = id_Usuario;
     }
 
     public Date getFecha() {
@@ -71,7 +73,7 @@ public class Cuota implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (id_Cuota != null ? id_Cuota.hashCode() : 0);
         return hash;
     }
 
@@ -82,7 +84,7 @@ public class Cuota implements Serializable {
             return false;
         }
         Cuota other = (Cuota) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id_Cuota == null && other.id_Cuota != null) || (this.id_Cuota != null && !this.id_Cuota.equals(other.id_Cuota))) {
             return false;
         }
         return true;
@@ -90,7 +92,7 @@ public class Cuota implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.pcera.Cuota[ id=" + id + " ]";
+        return "com.mycompany.pcera.Cuota[ id=" + id_Cuota + " ]";
     }
     
 }

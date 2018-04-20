@@ -5,6 +5,7 @@
  */
 package com.mycompany.pcera;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import javax.persistence.Id;
  * @author adrian
  */
 @Entity
-public class Evento {
+public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,7 +43,7 @@ public class Evento {
         return ubicacion;
     }
 
-    public Strin getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
@@ -62,7 +63,7 @@ public class Evento {
         this.ubicacion = ubicacion;
     }
 
-    public void setDescripcion(Strin descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
