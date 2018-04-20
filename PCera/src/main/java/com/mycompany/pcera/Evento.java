@@ -6,20 +6,24 @@
 package com.mycompany.pcera;
 
 import java.util.Objects;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author adrian
  */
+@Entity
 public class Evento {
-        private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_evento;
     private String nombre;
     private String ubicacion;
-    private Strin descripcion;
+    private String descripcion;
     private double precio;
 
     public static long getSerialVersionUID() {
