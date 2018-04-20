@@ -2,7 +2,7 @@ package com.mycompany.pcera;
 
 import java.util.Date;
 
-
+@Entity
 
 public class Promesa extends Usuario {
 
