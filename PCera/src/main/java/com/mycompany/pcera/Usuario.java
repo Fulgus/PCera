@@ -182,7 +182,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.id_usuario == null && other.id_usuario!= null) || (this.id_usuario != null && !this.id_usuario.equals(other.id))) {
+        if ((this.id_usuario == null && other.id_usuario!= null) || (this.id_usuario != null && !this.id_usuario.equals(other.id_usuario))) {
             return false;
         }
         return true;
