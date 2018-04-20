@@ -8,10 +8,16 @@ package com.mycompany.pcera;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,19 +30,18 @@ public class Documento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_documento;
-    private List<Usuario> usuario_id;
+    @Column(length = 100)
     private String nombre;
+    @Temporal(TemporalType.DATE)
     private Date fecha_subida;
     private int estado_archivo;
-    private String archivo;
+    @Lob
+    @Column(length = 10000)
+    private byte[] archivo;
 
-    public List<Usuario> getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(List<Usuario> usuario_id) {
-        this.usuario_id = usuario_id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "Documento_Usuario_FK")
+    private Usuario usuario;
 
     public String getNombre() {
         return nombre;
@@ -62,11 +67,11 @@ public class Documento implements Serializable {
         this.estado_archivo = estado_archivo;
     }
 
-    public String getArchivo() {
+    public byte[] getArchivo() {
         return archivo;
     }
 
-    public void setArchivo(String archivo) {
+    public void setArchivo(byte[] archivo) {
         this.archivo = archivo;
     }
 
@@ -102,5 +107,5 @@ public class Documento implements Serializable {
     public String toString() {
         return "com.mycompany.pcera.Documento[ id=" + id_documento + " ]";
     }
-    
+
 }
