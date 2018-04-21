@@ -21,32 +21,32 @@ import javax.persistence.ManyToOne;
  */
 @Embeddable
 public class InscripcionId {
-    private Usuario id_Usuario;
-    private Evento id_Evento;
+    private Long id_Usuario;
+    private Long id_Evento;
 
     public InscripcionId() {
         
     }
     
     
-    public InscripcionId(Usuario id_Usuario, Evento id_Evento) {
+    public InscripcionId(Long id_Usuario, Long id_Evento) {
         this.id_Usuario = id_Usuario;
         this.id_Evento = id_Evento;
     }
 
-    public Usuario getId_Usuario() {
+    public Long getId_Usuario() {
         return id_Usuario;
     }
 
-    public void setId_Usuario(Usuario id_Usuario) {
+    public void setId_Usuario(Long id_Usuario) {
         this.id_Usuario = id_Usuario;
     }
 
-    public Evento getId_Evento() {
+    public Long getId_Evento() {
         return id_Evento;
     }
 
-    public void setId_Evento(Evento id_Evento) {
+    public void setId_Evento(Long id_Evento) {
         this.id_Evento = id_Evento;
     }
 
