@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,6 +27,7 @@ public class Cuota implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Cuota id_Cuota;
     private Usuario id_Usuario;
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     private Double Importe;
     private Integer Estado;
