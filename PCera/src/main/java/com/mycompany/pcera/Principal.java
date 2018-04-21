@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
  */
 public class Principal {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PracticaJPAPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_PCera_jar_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         
         em.close();
