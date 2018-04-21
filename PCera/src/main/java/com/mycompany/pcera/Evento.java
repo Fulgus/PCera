@@ -22,8 +22,11 @@ public class Evento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_evento;
+    @Column(length = 100)
     private String nombre;
+    @Column(length = 100)
     private String ubicacion;
+    @Column(length = 500)
     private String descripcion;
     private double precio;
 
