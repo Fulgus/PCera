@@ -24,6 +24,11 @@ public class InscripcionId {
     private Usuario id_Usuario;
     private Evento id_Evento;
 
+    public InscripcionId() {
+        
+    }
+    
+    
     public InscripcionId(Usuario id_Usuario, Evento id_Evento) {
         this.id_Usuario = id_Usuario;
         this.id_Evento = id_Evento;
