@@ -7,12 +7,17 @@ package com.mycompany.pcera;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 /**
  *
@@ -23,23 +28,28 @@ public class Cuota implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //TODO: implementar la clase CuotaId para añadir el id de dos atributos.
-    @Id
+ 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Cuota id_Cuota;
-    private Usuario id_Usuario;
+    @EmbeddedId
+    private CuotaId id_Cuota;
     @Temporal(TemporalType.DATE)
     private Date fecha;
     private Double Importe;
-    private Integer Estado;
+    private Long Estado;
+    @OneToOne
+    @JoinColumn (name = "Cuota_Usuario_FK")
+    private Usuario id_Usuario;
 
-    public Cuota getId_Cuota() {
+    public CuotaId getId_Cuota() {
         return id_Cuota;
     }
 
-    public void setId_Cuota(Cuota id_Cuota) {
+    public void setId_Cuota(CuotaId id_Cuota) {
         this.id_Cuota = id_Cuota;
     }
-
+    
+    
+    
     public Usuario getId_Usuario() {
         return id_Usuario;
     }
@@ -64,11 +74,11 @@ public class Cuota implements Serializable {
         this.Importe = Importe;
     }
 
-    public Integer getEstado() {
+    public Long getEstado() {
         return Estado;
     }
 
-    public void setEstado(Integer Estado) {
+    public void setEstado(Long Estado) {
         this.Estado = Estado;
     }
 
@@ -81,13 +91,18 @@ public class Cuota implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cuota)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Cuota other = (Cuota) object;
-        if ((this.id_Cuota == null && other.id_Cuota != null) || (this.id_Cuota != null && !this.id_Cuota.equals(other.id_Cuota))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cuota other = (Cuota) obj;
+        if (!Objects.equals(this.id_Cuota, other.id_Cuota)) {
             return false;
         }
         return true;
