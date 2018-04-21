@@ -8,6 +8,7 @@ package com.mycompany.pcera;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,9 @@ import javax.persistence.ManyToOne;
  */
 @Embeddable
 public class InscripcionId {
+    @Column(name = "Usuario_ID_Usuario")
     private Long id_Usuario;
+    @Column(name = "Evento_ID_Evento")
     private Long id_Evento;
 
     public InscripcionId() {
