@@ -15,8 +15,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 /**
  *
  * @author Boti
@@ -24,36 +26,35 @@ import javax.persistence.TemporalType;
 @Entity
 public class Usuario implements Serializable {
 
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_usuario;
-    @Column(length=100)
+    @Column(length = 100)
     private String nombre;
-    @Column(length=100)
+    @Column(length = 100)
     private String apellidos;
-    @Column(length=9)
+    @Column(length = 9)
     private String DNI;
     @Temporal(TemporalType.DATE)
     private Date fecha_nacimiento;
     //Column(length=?)
     private Long tipo_usuario;
-    @Column(length=100)
+    @Column(length = 100)
     private String email;
-    @Column(length=100)
+    @Column(length = 100)
     private String direccion;
     //@Column(length=2)
-    private String sexo;    
+    private String sexo;
     @ElementCollection
     private List<Documento> documentos;
     private Cuota cuota;
-    //Preguntar
+    @OneToMany
     private Promesa promesa;
-    //Preguntar
+    @OneToMany
     private Inscripcion inscripcion;
-    //Preguntar
     @Lob
-    @Column(length=10000)
+    @Column(length = 10000)
     private byte[] data;
 
     public Long getId_usuario() {
@@ -182,7 +183,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.id_usuario == null && other.id_usuario!= null) || (this.id_usuario != null && !this.id_usuario.equals(other.id_usuario))) {
+        if ((this.id_usuario == null && other.id_usuario != null) || (this.id_usuario != null && !this.id_usuario.equals(other.id_usuario))) {
             return false;
         }
         return true;
@@ -192,5 +193,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.mycompany.pcera.Usuario[ id=" + id_usuario + " ]";
     }
-    
+
 }
