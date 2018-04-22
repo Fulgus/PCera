@@ -22,14 +22,22 @@ public class Inscripcion implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     private InscripcionId id_inscripcion;
-    
+
     @ManyToOne
     @JoinColumn(name = "USUARIO_ID_USUARIO", referencedColumnName = "ID_USUARIO")    
     private Usuario id_Usuario;
-    
+
     @ManyToOne
     @JoinColumn(name = "EVENTO_ID_EVENTO", referencedColumnName = "ID_EVENTO")
     private Evento id_Evento;
+
+    public InscripcionId getId_inscripcion() {
+        return id_inscripcion;
+    }
+
+    public void setId_inscripcion(InscripcionId id_inscripcion) {
+        this.id_inscripcion = id_inscripcion;
+    }
 
     public Usuario getId_Usuario() {
         return id_Usuario;
@@ -45,14 +53,6 @@ public class Inscripcion implements Serializable {
 
     public void setId_Evento(Evento id_Evento) {
         this.id_Evento = id_Evento;
-    }
-
-    public InscripcionId getId() {
-        return id_inscripcion;
-    }
-
-    public void setId(InscripcionId id) {
-        this.id_inscripcion = id;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Inscripcion implements Serializable {
     
     @Override
     public String toString() {
-        return "com.mycompany.pcera.Inscripcion[ id=" + id_inscripcion + " ]";
+        return "Inscripcion{" + "id_inscripcion=" + id_inscripcion + ", id_Usuario=" + id_Usuario + ", id_Evento=" + id_Evento + '}';
     }
-    
+
 }
