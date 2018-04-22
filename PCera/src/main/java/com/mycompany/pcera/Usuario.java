@@ -9,16 +9,16 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,50 +30,41 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_usuario;
-    @Column(length = 100)
+    private Integer idUsuario;
     private String nombre;
-    @Column(length = 100)
     private String apellidos;
-    @Column(length = 9)
-    private String DNI;
+    private String dni;
     @Temporal(TemporalType.DATE)
-    private Date fecha_nacimiento;
-    //Column(length=?)
-    private Long tipo_usuario;
-    @Column(length = 100)
+    private Date fechaNacimiento;
+    private Integer tipoUsuario;
     private String email;
-    @Column(length = 100)
     private String direccion;
-    //@Column(length=2)
-    private String sexo;    
+    private String sexo;
     @Lob
     @Column(length = 10000)
-    private byte[] imagen;
-    
-    //Relaciones
-    @OneToMany(mappedBy = "Documento_Usuario_FK")
-    private List<Documento> documentos;
-    @OneToOne(mappedBy = "Cuota_Usuario_FK")
-    private Cuota cuota;
-    @OneToMany (mappedBy="Promesa_Usuario_FK")
-    private Promesa promesa;
-    @OneToMany (mappedBy="Inscripcion_Usuario_FK")
-    private Inscripcion inscripcion;
+    private byte[] fotoPerfil;
+    @ManyToMany(mappedBy = "usuarioCollection")
+    private List<Evento> eventoCollection;
+    @OneToMany(mappedBy = "usuarioIdUsuario")
+    private List<Documento> documentoCollection;
+    @OneToMany(mappedBy = "usuarioIdUsuario")
+    private List<Cuota> cuotaCollection;
+    @OneToMany(mappedBy = "usuario")
+    private List<Promesa> promesaCollection;
 
-    public byte[] getImagen() {
-        return imagen;
-    }
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
-    
-    public Long getId_usuario() {
-        return id_usuario;
+    public Usuario() {
     }
 
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
+    public Usuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -92,28 +83,28 @@ public class Usuario implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getDni() {
+        return dni;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Long getTipo_usuario() {
-        return tipo_usuario;
+    public Integer getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setTipo_usuario(Long tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
+    public void setTipoUsuario(Integer tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public String getEmail() {
@@ -140,42 +131,54 @@ public class Usuario implements Serializable {
         this.sexo = sexo;
     }
 
-    public List<Documento> getDocumentos() {
-        return documentos;
+    public byte[] getFotoPerfil() {
+        return fotoPerfil;
     }
 
-    public void setDocumentos(List<Documento> documentos) {
-        this.documentos = documentos;
+    public void setFotoPerfil(byte[] fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
-    public Cuota getCuota() {
-        return cuota;
+    @XmlTransient
+    public List<Evento> getEventoCollection() {
+        return eventoCollection;
     }
 
-    public void setCuota(Cuota cuota) {
-        this.cuota = cuota;
+    public void setEventoCollection(List<Evento> eventoCollection) {
+        this.eventoCollection = eventoCollection;
     }
 
-    public Promesa getPromesa() {
-        return promesa;
+    @XmlTransient
+    public List<Documento> getDocumentoCollection() {
+        return documentoCollection;
     }
 
-    public void setPromesa(Promesa promesa) {
-        this.promesa = promesa;
+    public void setDocumentoCollection(List<Documento> documentoCollection) {
+        this.documentoCollection = documentoCollection;
     }
 
-    public Inscripcion getInscripcion() {
-        return inscripcion;
+    @XmlTransient
+    public List<Cuota> getCuotaCollection() {
+        return cuotaCollection;
     }
 
-    public void setInscripcion(Inscripcion inscripcion) {
-        this.inscripcion = inscripcion;
+    public void setCuotaCollection(List<Cuota> cuotaCollection) {
+        this.cuotaCollection = cuotaCollection;
+    }
+
+    @XmlTransient
+    public List<Promesa> getPromesaCollection() {
+        return promesaCollection;
+    }
+
+    public void setPromesaCollection(List<Promesa> promesaCollection) {
+        this.promesaCollection = promesaCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_usuario != null ? id_usuario.hashCode() : 0);
+        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
         return hash;
     }
 
@@ -186,7 +189,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.id_usuario == null && other.id_usuario != null) || (this.id_usuario != null && !this.id_usuario.equals(other.id_usuario))) {
+        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
             return false;
         }
         return true;
@@ -194,7 +197,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.pcera.Usuario[ id=" + id_usuario + " ]";
+        return "pkg0entrega1.Usuario[ idUsuario=" + idUsuario + " ]";
     }
 
 }

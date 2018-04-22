@@ -7,17 +7,14 @@ package com.mycompany.pcera;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 
 /**
  *
@@ -27,35 +24,30 @@ import javax.persistence.TemporalType;
 public class Cuota implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    //TODO: implementar la clase CuotaId para añadir el id de dos atributos.
- 
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @EmbeddedId
-    private CuotaId id_Cuota;
+    private Integer idCuota;
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    private Double Importe;
-    private Long Estado;
-    @OneToOne
-    @JoinColumn (name = "Cuota_Usuario_FK")
-    private Usuario id_Usuario;
+    private Integer importe;
+    private Integer estado;
+    @JoinColumn(name = "USUARIO_ID_USUARIO", referencedColumnName = "ID_USUARIO")
+    @ManyToOne(optional = false)
+    private Usuario usuarioIdUsuario;
 
-    public CuotaId getId_Cuota() {
-        return id_Cuota;
+    public Cuota() {
     }
 
-    public void setId_Cuota(CuotaId id_Cuota) {
-        this.id_Cuota = id_Cuota;
-    }
-    
-    
-    
-    public Usuario getId_Usuario() {
-        return id_Usuario;
+    public Cuota(Integer idCuota) {
+        this.idCuota = idCuota;
     }
 
-    public void setId_Usuario(Usuario id_Usuario) {
-        this.id_Usuario = id_Usuario;
+    public Integer getIdCuota() {
+        return idCuota;
+    }
+
+    public void setIdCuota(Integer idCuota) {
+        this.idCuota = idCuota;
     }
 
     public Date getFecha() {
@@ -66,43 +58,45 @@ public class Cuota implements Serializable {
         this.fecha = fecha;
     }
 
-    public Double getImporte() {
-        return Importe;
+    public Integer getImporte() {
+        return importe;
     }
 
-    public void setImporte(Double Importe) {
-        this.Importe = Importe;
+    public void setImporte(Integer importe) {
+        this.importe = importe;
     }
 
-    public Long getEstado() {
-        return Estado;
+    public Integer getEstado() {
+        return estado;
     }
 
-    public void setEstado(Long Estado) {
-        this.Estado = Estado;
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
+    public Usuario getUsuarioIdUsuario() {
+        return usuarioIdUsuario;
+    }
+
+    public void setUsuarioIdUsuario(Usuario usuarioIdUsuario) {
+        this.usuarioIdUsuario = usuarioIdUsuario;
+    }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_Cuota != null ? id_Cuota.hashCode() : 0);
+        hash += (idCuota != null ? idCuota.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Cuota)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cuota other = (Cuota) obj;
-        if (!Objects.equals(this.id_Cuota, other.id_Cuota)) {
+        Cuota other = (Cuota) object;
+        if ((this.idCuota == null && other.idCuota != null) || (this.idCuota != null && !this.idCuota.equals(other.idCuota))) {
             return false;
         }
         return true;
@@ -110,7 +104,6 @@ public class Cuota implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.pcera.Cuota[ id=" + id_Cuota + " ]";
+        return "pkg0entrega1.Cuota[ idCuota=" + idCuota + " ]";
     }
-    
 }

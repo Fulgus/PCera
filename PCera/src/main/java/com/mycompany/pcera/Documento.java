@@ -29,19 +29,32 @@ public class Documento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_documento;
-    @Column(length = 100)
+    private Integer idDocumento;
     private String nombre;
     @Temporal(TemporalType.DATE)
-    private Date fecha_subida;
-    private Integer estado_archivo;
+    private Date fechaSubida;
+    private Integer estadoArchivo;
     @Lob
     @Column(length = 10000)
     private byte[] archivo;
+    @JoinColumn(name = "USUARIO_ID_USUARIO", referencedColumnName = "ID_USUARIO")
+    @ManyToOne(optional = false)
+    private Usuario usuarioIdUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "Documento_Usuario_FK")
-    private Usuario usuario;
+    public Documento() {
+    }
+
+    public Documento(Integer idDocumento) {
+        this.idDocumento = idDocumento;
+    }
+
+    public Integer getIdDocumento() {
+        return idDocumento;
+    }
+
+    public void setIdDocumento(Integer idDocumento) {
+        this.idDocumento = idDocumento;
+    }
 
     public String getNombre() {
         return nombre;
@@ -51,20 +64,20 @@ public class Documento implements Serializable {
         this.nombre = nombre;
     }
 
-    public Date getFecha_subida() {
-        return fecha_subida;
+    public Date getFechaSubida() {
+        return fechaSubida;
     }
 
-    public void setFecha_subida(Date fecha_subida) {
-        this.fecha_subida = fecha_subida;
+    public void setFechaSubida(Date fechaSubida) {
+        this.fechaSubida = fechaSubida;
     }
 
-    public Integer getEstado_archivo() {
-        return estado_archivo;
+    public Integer getEstadoArchivo() {
+        return estadoArchivo;
     }
 
-    public void setEstado_archivo(Integer estado_archivo) {
-        this.estado_archivo = estado_archivo;
+    public void setEstadoArchivo(Integer estadoArchivo) {
+        this.estadoArchivo = estadoArchivo;
     }
 
     public byte[] getArchivo() {
@@ -75,18 +88,18 @@ public class Documento implements Serializable {
         this.archivo = archivo;
     }
 
-    public Integer getId() {
-        return id_documento;
+    public Usuario getUsuarioIdUsuario() {
+        return usuarioIdUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id_documento = id;
+    public void setUsuarioIdUsuario(Usuario usuarioIdUsuario) {
+        this.usuarioIdUsuario = usuarioIdUsuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_documento != null ? id_documento.hashCode() : 0);
+        hash += (idDocumento != null ? idDocumento.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +110,7 @@ public class Documento implements Serializable {
             return false;
         }
         Documento other = (Documento) object;
-        if ((this.id_documento == null && other.id_documento != null) || (this.id_documento != null && !this.id_documento.equals(other.id_documento))) {
+        if ((this.idDocumento == null && other.idDocumento != null) || (this.idDocumento != null && !this.idDocumento.equals(other.idDocumento))) {
             return false;
         }
         return true;
@@ -105,7 +118,7 @@ public class Documento implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.pcera.Documento[ id=" + id_documento + " ]";
+        return "pkg0entrega1.Documento[ idDocumento=" + idDocumento + " ]";
     }
 
 }

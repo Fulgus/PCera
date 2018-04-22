@@ -6,15 +6,16 @@
 package com.mycompany.pcera;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -22,102 +23,92 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Evento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_evento;
-    @Column(length = 100)
+    private Integer idEvento;
     private String nombre;
-    @Column(length = 100)
-    private String ubicacion;
-    @Column(length = 500)
+    private String ubicacon;
     private String descripcion;
-    private double precio;
-    
-    @OneToMany(mappedBy = "seccion")
-    private List<Evento> eventos = new ArrayList<>();
-    
-    public Evento(){
-        
+    private Integer precio;
+    @JoinTable(name = "INSCRIPCION", joinColumns = {
+        @JoinColumn(name = "EVENTO_ID_EVENTO", referencedColumnName = "ID_EVENTO")}, inverseJoinColumns = {
+        @JoinColumn(name = "USUARIO_ID_USUARIO", referencedColumnName = "ID_USUARIO")})
+    @ManyToMany
+    private List<Usuario> usuarioCollection;
+
+    public Evento() {
     }
 
-    public Evento(Integer id_evento){
-        this.id_evento = id_evento;
-    }
-    
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-    
-    public List<Evento> getEventos() {
-        return eventos;
+    public Evento(Integer idEvento) {
+        this.idEvento = idEvento;
     }
 
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
+    public Integer getIdEvento() {
+        return idEvento;
     }
-    
 
-    public Integer getId_evento() {
-        return id_evento;
+    public void setIdEvento(Integer idEvento) {
+        this.idEvento = idEvento;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getUbicacon() {
+        return ubicacon;
+    }
+
+    public void setUbicacon(String ubicacon) {
+        this.ubicacon = ubicacon;
     }
 
     public String getDescripcion() {
         return descripcion;
     }
 
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setId_evento(Integer id_evento) {
-        this.id_evento = id_evento;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public void setPrecio(double precio) {
+    public Integer getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Integer precio) {
         this.precio = precio;
+    }
+
+    @XmlTransient
+    public Collection<Usuario> getUsuarioCollection() {
+        return usuarioCollection;
+    }
+
+    public void setUsuarioCollection(List<Usuario> usuarioCollection) {
+        this.usuarioCollection = usuarioCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_evento != null ? id_evento.hashCode() : 0);
+        hash += (idEvento != null ? idEvento.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Evento)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Evento other = (Evento) obj;
-        if (!Objects.equals(this.id_evento, other.id_evento)) {
+        Evento other = (Evento) object;
+        if ((this.idEvento == null && other.idEvento != null) || (this.idEvento != null && !this.idEvento.equals(other.idEvento))) {
             return false;
         }
         return true;
@@ -125,8 +116,7 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "Evento{" + "id_evento=" + id_evento + '}';
+        return "pkg0entrega1.Evento[ idEvento=" + idEvento + " ]";
     }
 
-    
 }

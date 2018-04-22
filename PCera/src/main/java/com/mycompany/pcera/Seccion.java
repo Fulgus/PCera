@@ -6,14 +6,13 @@ package com.mycompany.pcera;
  * and open the template in the editor.
  */
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,18 +24,24 @@ public class Seccion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(length = 100)
+    private Integer idSeccion;
     private String nombre;
     @OneToMany(mappedBy = "seccion")
-    private List<Promesa> promesas = new ArrayList<>();
+    private List<Promesa> promesaCollection;
 
-    public Long getId() {
-        return id;
+    public Seccion() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Seccion(Integer idSeccion) {
+        this.idSeccion = idSeccion;
+    }
+
+    public Integer getIdSeccion() {
+        return idSeccion;
+    }
+
+    public void setIdSeccion(Integer idSeccion) {
+        this.idSeccion = idSeccion;
     }
 
     public String getNombre() {
@@ -47,18 +52,19 @@ public class Seccion implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Promesa> getPromesas() {
-        return promesas;
+    @XmlTransient
+    public List<Promesa> getPromesaCollection() {
+        return promesaCollection;
     }
 
-    public void setPromesas(List<Promesa> promesas) {
-        this.promesas = promesas;
+    public void setPromesaCollection(List<Promesa> promesaCollection) {
+        this.promesaCollection = promesaCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idSeccion != null ? idSeccion.hashCode() : 0);
         return hash;
     }
 
@@ -69,7 +75,7 @@ public class Seccion implements Serializable {
             return false;
         }
         Seccion other = (Seccion) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idSeccion == null && other.idSeccion != null) || (this.idSeccion != null && !this.idSeccion.equals(other.idSeccion))) {
             return false;
         }
         return true;
@@ -77,7 +83,7 @@ public class Seccion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.pcera.Seccion[ id=" + id + " ]";
+        return "pkg0entrega1.Seccion[ idSeccion=" + idSeccion + " ]";
     }
 
 }

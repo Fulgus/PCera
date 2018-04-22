@@ -1,47 +1,59 @@
 package com.mycompany.pcera;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-
 public class Promesa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    private PromesaId Id_Usuario; //Incluyo los atributos que hacen parte de la clave primaria
-
-    private PromesaId Id_Seccion;
-    /*
-Con la relacion muchos a uno la tabla promesa no contiene
-una columna usuario, pero con el @JoinColumn se define el
-nombre de la clave foranea, que sera usada para obtener el
-id del usuario.
-     */
-
-    @ManyToOne
-    @JoinColumn(name = "Promesa_Usuario_FK")
+    protected PromesaPK promesaPK;
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
+    //En esta etiqueta son neesarios todos esos atributos para que funcione
+    @JoinColumn(name = "SECCION_ID_SECCION", referencedColumnName = "ID_SECCION", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Seccion seccion;
+    //En esta etiqueta son neesarios todos esos atributos para que funcione
+    @JoinColumn(name = "USUARIO_ID_USUARIO", referencedColumnName = "ID_USUARIO", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "Promesa_Seccion_FK")
-    private Seccion seccionid;
-
-    public PromesaId getId_Usuario() {
-        return Id_Usuario;
+    public Promesa() {
     }
 
-    public void setId_Usuario(PromesaId Id_Usuario) {
-        this.Id_Usuario = Id_Usuario;
+    public Promesa(PromesaPK promesaPK) {
+        this.promesaPK = promesaPK;
     }
 
-    public PromesaId getId_Seccion() {
-        return Id_Seccion;
+    public Promesa(int usuarioIdUsuario, int seccionIdSeccion) {
+        this.promesaPK = new PromesaPK(usuarioIdUsuario, seccionIdSeccion);
     }
 
-    public void setId_Seccion(PromesaId Id_Seccion) {
-        this.Id_Seccion = Id_Seccion;
+    public PromesaPK getPromesaPK() {
+        return promesaPK;
+    }
+
+    public void setPromesaPK(PromesaPK promesaPK) {
+        this.promesaPK = promesaPK;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Seccion getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
     }
 
     public Usuario getUsuario() {
@@ -52,46 +64,21 @@ id del usuario.
         this.usuario = usuario;
     }
 
-    public Seccion getSeccionid() {
-        return seccionid;
-    }
-
-    public void setSeccionid(Seccion seccionid) {
-        this.seccionid = seccionid;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.Id_Usuario);
-        hash = 23 * hash + Objects.hashCode(this.Id_Seccion);
-        hash = 23 * hash + Objects.hashCode(this.usuario);
-        hash = 23 * hash + Objects.hashCode(this.seccionid);
+        int hash = 0;
+        hash += (promesaPK != null ? promesaPK.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Promesa)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Promesa other = (Promesa) obj;
-        if (!Objects.equals(this.Id_Usuario, other.Id_Usuario)) {
-            return false;
-        }
-        if (!Objects.equals(this.Id_Seccion, other.Id_Seccion)) {
-            return false;
-        }
-        if (!Objects.equals(this.usuario, other.usuario)) {
-            return false;
-        }
-        if (!Objects.equals(this.seccionid, other.seccionid)) {
+        Promesa other = (Promesa) object;
+        if ((this.promesaPK == null && other.promesaPK != null) || (this.promesaPK != null && !this.promesaPK.equals(other.promesaPK))) {
             return false;
         }
         return true;
@@ -99,7 +86,7 @@ id del usuario.
 
     @Override
     public String toString() {
-        return "Promesa{" + "Id_Usuario=" + Id_Usuario + ", Id_Seccion=" + Id_Seccion + ", usuario=" + usuario + ", seccionid=" + seccionid + '}';
+        return "pkg0entrega1.Promesa[ promesaPK=" + promesaPK + " ]";
     }
 
 }
