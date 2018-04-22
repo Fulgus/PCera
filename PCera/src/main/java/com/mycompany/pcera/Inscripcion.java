@@ -23,11 +23,11 @@ public class Inscripcion implements Serializable {
     private InscripcionId id_inscripcion;
     
     @ManyToOne
-    @JoinColumn (name = "Inscripcion_Usuario_FK")
+    @JoinColumn(name = "USUARIO_ID_USUARIO", referencedColumnName = "ID_USUARIO")    
     private Usuario id_Usuario;
     
     @ManyToOne
-    @JoinColumn (name = "Inscripcion_Evento_FK")
+    @JoinColumn(name = "EVENTO_ID_EVENTO", referencedColumnName = "ID_EVENTO")
     private Evento id_Evento;
 
     public Usuario getId_Usuario() {
