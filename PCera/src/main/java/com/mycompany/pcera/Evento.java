@@ -6,12 +6,15 @@
 package com.mycompany.pcera;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,7 +25,7 @@ public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_evento;
+    private Integer id_evento;
     @Column(length = 100)
     private String nombre;
     @Column(length = 100)
@@ -30,12 +33,32 @@ public class Evento implements Serializable {
     @Column(length = 500)
     private String descripcion;
     private double precio;
+    
+    @OneToMany(mappedBy = "seccion")
+    private List<Evento> eventos = new ArrayList<>();
+    
+    public Evento(){
+        
+    }
 
+    public Evento(Integer id_evento){
+        this.id_evento = id_evento;
+    }
+    
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+    
+    public List<Evento> getEventos() {
+        return eventos;
+    }
 
-    public Long getId_evento() {
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
+    
+
+    public Integer getId_evento() {
         return id_evento;
     }
 
@@ -55,7 +78,7 @@ public class Evento implements Serializable {
         return precio;
     }
 
-    public void setId_evento(Long id_evento) {
+    public void setId_evento(Integer id_evento) {
         this.id_evento = id_evento;
     }
 
@@ -77,7 +100,8 @@ public class Evento implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 0;
+        hash += (id_evento != null ? id_evento.hashCode() : 0);
         return hash;
     }
 
