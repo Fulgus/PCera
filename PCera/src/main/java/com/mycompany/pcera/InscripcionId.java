@@ -16,9 +16,9 @@ import javax.persistence.Column;
  */
 @Embeddable
 public class InscripcionId implements Serializable{
-    @Column(name = "Usuario_ID_Usuario")
+    @Column(name = "USUARIO_ID_USUARIO")
     private Long id_Usuario;
-    @Column(name = "Evento_ID_Evento")
+    @Column(name = "EVENTO_ID_EVENTO")
     private Long id_Evento;
 
     public InscripcionId() {
