@@ -37,7 +37,7 @@ public class Documento implements Serializable {
     private Integer estado_archivo;
     @Lob
     @Column(length = 10000)
-    private Serializable archivo;
+    private byte[] archivo;
 
     @ManyToOne
     @JoinColumn(name = "Documento_Usuario_FK")
@@ -67,11 +67,11 @@ public class Documento implements Serializable {
         this.estado_archivo = estado_archivo;
     }
 
-    public Serializable getArchivo() {
+    public byte[] getArchivo() {
         return archivo;
     }
 
-    public void setArchivo(Serializable archivo) {
+    public void setArchivo(byte[] archivo) {
         this.archivo = archivo;
     }
 
