@@ -64,7 +64,6 @@ public class Usuario implements Serializable {
     public byte[] getImagen() {
         return imagen;
     }
-
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
