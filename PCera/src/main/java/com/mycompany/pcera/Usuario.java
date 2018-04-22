@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -45,18 +46,29 @@ public class Usuario implements Serializable {
     @Column(length = 100)
     private String direccion;
     //@Column(length=2)
-    private String sexo;
-    @ElementCollection
-    private List<Documento> documentos;
-    private Cuota cuota;
-    @OneToMany
-    private Promesa promesa;
-    @OneToMany
-    private Inscripcion inscripcion;
+    private String sexo;    
     @Lob
     @Column(length = 10000)
-    private byte[] data;
+    private byte[] imagen;
+    
+    //Relaciones
+    @OneToMany(mappedBy = "Documento_Usuario_FK")
+    private List<Documento> documentos;
+    @OneToOne(mappedBy = "Cuota_Usuario_FK")
+    private Cuota cuota;
+    @OneToMany (mappedBy="Promesa_Usuario_FK")
+    private Promesa promesa;
+    @OneToMany (mappedBy="Inscripcion_Usuario_FK")
+    private Inscripcion inscripcion;
 
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+    
     public Long getId_usuario() {
         return id_usuario;
     }
@@ -159,14 +171,6 @@ public class Usuario implements Serializable {
 
     public void setInscripcion(Inscripcion inscripcion) {
         this.inscripcion = inscripcion;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
     }
 
     @Override
