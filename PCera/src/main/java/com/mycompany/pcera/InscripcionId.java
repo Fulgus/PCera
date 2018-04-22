@@ -5,6 +5,7 @@
  */
 package com.mycompany.pcera;
 
+import java.io.Serializable;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import javax.persistence.Column;
  * @author JoseMaria
  */
 @Embeddable
-public class InscripcionId {
+public class InscripcionId implements Serializable{
     @Column(name = "Usuario_ID_Usuario")
     private Long id_Usuario;
     @Column(name = "Evento_ID_Evento")
