@@ -8,9 +8,9 @@ import java.util.Objects;
 public class Promesa extends Usuario {
 
     @EmbeddedId
-    private Usuario user_id; //Incluyo los atributos que hacen parte de la clave primaria
+    private PromesaId Id_Usuario; //Incluyo los atributos que hacen parte de la clave primaria
 
-    private Seccion seccion_id;
+    private PromesaId Id_Seccion;
 /*
 Con la relacion muchos a uno la tabla promesa no contiene
 una columna usuario, pero con el @JoinColumn se define el
