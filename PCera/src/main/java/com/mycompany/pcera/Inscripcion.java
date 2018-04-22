@@ -6,6 +6,7 @@
 package com.mycompany.pcera;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,14 +22,22 @@ public class Inscripcion implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     private InscripcionId id_inscripcion;
-    
+
     @ManyToOne
-    @JoinColumn (name = "Inscripcion_Usuario_FK")
+    @JoinColumn(name = "Inscripcion_Usuario_FK")
     private Usuario id_Usuario;
-    
+
     @ManyToOne
-    @JoinColumn (name = "Inscripcion_Evento_FK")
+    @JoinColumn(name = "Inscripcion_Evento_FK")
     private Evento id_Evento;
+
+    public InscripcionId getId_inscripcion() {
+        return id_inscripcion;
+    }
+
+    public void setId_inscripcion(InscripcionId id_inscripcion) {
+        this.id_inscripcion = id_inscripcion;
+    }
 
     public Usuario getId_Usuario() {
         return id_Usuario;
@@ -46,29 +55,34 @@ public class Inscripcion implements Serializable {
         this.id_Evento = id_Evento;
     }
 
-    public InscripcionId getId() {
-        return id_inscripcion;
-    }
-
-    public void setId(InscripcionId id) {
-        this.id_inscripcion = id;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id_inscripcion != null ? id_inscripcion.hashCode() : 0);
+        int hash = 3;
+        hash = 73 * hash + Objects.hashCode(this.id_inscripcion);
+        hash = 73 * hash + Objects.hashCode(this.id_Usuario);
+        hash = 73 * hash + Objects.hashCode(this.id_Evento);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Inscripcion)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Inscripcion other = (Inscripcion) object;
-        if ((this.id_inscripcion == null && other.id_inscripcion != null) || (this.id_inscripcion != null && !this.id_inscripcion.equals(other.id_inscripcion))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Inscripcion other = (Inscripcion) obj;
+        if (!Objects.equals(this.id_inscripcion, other.id_inscripcion)) {
+            return false;
+        }
+        if (!Objects.equals(this.id_Usuario, other.id_Usuario)) {
+            return false;
+        }
+        if (!Objects.equals(this.id_Evento, other.id_Evento)) {
             return false;
         }
         return true;
@@ -76,7 +90,7 @@ public class Inscripcion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.pcera.Inscripcion[ id=" + id_inscripcion + " ]";
+        return "Inscripcion{" + "id_inscripcion=" + id_inscripcion + ", id_Usuario=" + id_Usuario + ", id_Evento=" + id_Evento + '}';
     }
-    
+
 }

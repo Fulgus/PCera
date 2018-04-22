@@ -15,16 +15,16 @@ import javax.persistence.Column;
  */
 @Embeddable
 public class InscripcionId {
+
     @Column(name = "Usuario_ID_Usuario")
     private Long id_Usuario;
     @Column(name = "Evento_ID_Evento")
     private Long id_Evento;
 
     public InscripcionId() {
-        
+
     }
-    
-    
+
     public InscripcionId(Long id_Usuario, Long id_Evento) {
         this.id_Usuario = id_Usuario;
         this.id_Evento = id_Evento;
@@ -49,8 +49,8 @@ public class InscripcionId {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id_Usuario);
-        hash = 79 * hash + Objects.hashCode(this.id_Evento);
+        hash = 97 * hash + Objects.hashCode(this.id_Usuario);
+        hash = 97 * hash + Objects.hashCode(this.id_Evento);
         return hash;
     }
 
@@ -74,7 +74,10 @@ public class InscripcionId {
         }
         return true;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "InscripcionId{" + "id_Usuario=" + id_Usuario + ", id_Evento=" + id_Evento + '}';
+    }
+
 }

@@ -28,7 +28,7 @@ public class Seccion implements Serializable {
     private Long id;
     @Column(length = 100)
     private String nombre;
-    @OneToMany
+    @OneToMany(mappedBy = "seccion")
     private List<Promesa> promesas = new ArrayList<>();
 
     public Long getId() {
