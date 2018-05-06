@@ -8,6 +8,7 @@ package com.mycompany.pcera;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -37,6 +39,8 @@ public class Evento implements Serializable {
         @JoinColumn(name = "USUARIO_ID_USUARIO", referencedColumnName = "ID_USUARIO")})
     @ManyToMany
     private List<Usuario> usuarioCollection;
+    @ManyToOne(optional = false)
+    private Seccion seccion;
 
     public Evento() {
     }
@@ -94,21 +98,58 @@ public class Evento implements Serializable {
         this.usuarioCollection = usuarioCollection;
     }
 
+    public Seccion getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idEvento != null ? idEvento.hashCode() : 0);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.idEvento);
+        hash = 53 * hash + Objects.hashCode(this.nombre);
+        hash = 53 * hash + Objects.hashCode(this.ubicacon);
+        hash = 53 * hash + Objects.hashCode(this.descripcion);
+        hash = 53 * hash + Objects.hashCode(this.precio);
+        hash = 53 * hash + Objects.hashCode(this.usuarioCollection);
+        hash = 53 * hash + Objects.hashCode(this.seccion);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Evento)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Evento other = (Evento) object;
-        if ((this.idEvento == null && other.idEvento != null) || (this.idEvento != null && !this.idEvento.equals(other.idEvento))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Evento other = (Evento) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.ubicacon, other.ubicacon)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        if (!Objects.equals(this.idEvento, other.idEvento)) {
+            return false;
+        }
+        if (!Objects.equals(this.precio, other.precio)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuarioCollection, other.usuarioCollection)) {
+            return false;
+        }
+        if (!Objects.equals(this.seccion, other.seccion)) {
             return false;
         }
         return true;
@@ -116,7 +157,9 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "pkg0entrega1.Evento[ idEvento=" + idEvento + " ]";
+        return "Evento{" + "idEvento=" + idEvento + ", nombre=" + nombre + ", ubicacon=" + ubicacon + ", descripcion=" + descripcion + ", precio=" + precio + ", usuarioCollection=" + usuarioCollection + ", seccion=" + seccion + '}';
     }
+
+   
 
 }

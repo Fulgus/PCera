@@ -7,6 +7,7 @@ package com.mycompany.pcera;
  */
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,8 @@ public class Seccion implements Serializable {
     private String nombre;
     @OneToMany(mappedBy = "seccion")
     private List<Promesa> promesaCollection;
+    @OneToMany(mappedBy = "seccion")
+    private List<Evento> eventoCollection;
 
     public Seccion() {
     }
@@ -61,21 +64,46 @@ public class Seccion implements Serializable {
         this.promesaCollection = promesaCollection;
     }
 
+    public List<Evento> getEventoCollection() {
+        return eventoCollection;
+    }
+
+    public void setEventoCollection(List<Evento> eventoCollection) {
+        this.eventoCollection = eventoCollection;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idSeccion != null ? idSeccion.hashCode() : 0);
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.idSeccion);
+        hash = 53 * hash + Objects.hashCode(this.nombre);
+        hash = 53 * hash + Objects.hashCode(this.promesaCollection);
+        hash = 53 * hash + Objects.hashCode(this.eventoCollection);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Seccion)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Seccion other = (Seccion) object;
-        if ((this.idSeccion == null && other.idSeccion != null) || (this.idSeccion != null && !this.idSeccion.equals(other.idSeccion))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Seccion other = (Seccion) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.idSeccion, other.idSeccion)) {
+            return false;
+        }
+        if (!Objects.equals(this.promesaCollection, other.promesaCollection)) {
+            return false;
+        }
+        if (!Objects.equals(this.eventoCollection, other.eventoCollection)) {
             return false;
         }
         return true;
@@ -83,7 +111,7 @@ public class Seccion implements Serializable {
 
     @Override
     public String toString() {
-        return "pkg0entrega1.Seccion[ idSeccion=" + idSeccion + " ]";
+        return "Seccion{" + "idSeccion=" + idSeccion + ", nombre=" + nombre + ", promesaCollection=" + promesaCollection + ", eventoCollection=" + eventoCollection + '}';
     }
 
 }
